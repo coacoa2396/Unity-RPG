@@ -36,4 +36,23 @@ public class FieldOfView : MonoBehaviour
         }
     }
 
+    public void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.white;
+        Gizmos.DrawWireSphere(transform.position, range);
+
+        Vector3 lookDir = AngleToDir(transform.eulerAngles.y);
+        Vector3 rightDir = AngleToDir(transform.eulerAngles.y + angle * 0.5f);
+        Vector3 leftDir = AngleToDir(transform.eulerAngles.y - angle * 0.5f);
+
+        Debug.DrawRay(transform.position, lookDir * range, Color.green);
+        Debug.DrawRay(transform.position, rightDir * range, Color.blue);
+        Debug.DrawRay(transform.position, leftDir * range, Color.blue);
+    }
+
+    private Vector3 AngleToDir(float angle)
+    {
+        float radian = angle * Mathf.Deg2Rad;
+        return new Vector3(Mathf.Sin(radian), 0, Mathf.Cos(radian));
+    }
 }
