@@ -45,7 +45,7 @@ public class PlayerMover : MonoBehaviour
     }
     //                                                              // 크기와 방향을 다 가지고 있으면 Vector(속도)
     //                                                              // 다만 이제 속력을 비교하고 싶은 경우에는 magnitude 대신
-    //                                      5
-
+    //                                                              // sqrMagnitude를 사용하여 제곱된 상태에서 비교하면 빠르다
+}
 // Vector의 투영
 // Vector3.Project 혹은 평면인 경우 Vector3.ProjectOnPlane 쓰기
