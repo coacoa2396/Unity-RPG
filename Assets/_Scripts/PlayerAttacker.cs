@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class PlayerAttacker : MonoBehaviour
 {
+    [SerializeField] bool debug;
 
     [SerializeField] Animator animator;
     [SerializeField] Weapon weapon;
@@ -67,11 +69,16 @@ public class PlayerAttacker : MonoBehaviour
     */
     void OnAttack(InputValue value)
     {
+        if (EventSystem.current.IsPointerOverGameObject())
+            return;
         Attack();
     }
 
     private void OnDrawGizmosSelected()
     {
+        if (debug == false)
+            return;
+
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, range);
     }
