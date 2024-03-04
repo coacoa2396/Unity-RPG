@@ -51,7 +51,7 @@ public class SceneManager : MonoBehaviour
             yield return null;
         }
 
-        AsyncOperation oper = UnitySceneManager.LoadSceneAsync(sceneName);
+        AsyncOperation oper = UnitySceneManager.LoadSceneAsync(sceneName);      // 비동기식으로 백그라운드에 다음 씬을 로당하는 방법
         //oper.allowSceneActivation = false;          // 로딩이 되어있지만 대기하는 상태
         while (oper.isDone == false)        // oper.progress < 0.9f는 스페이스바 누르는버전인 경우 사용
         {
