@@ -41,6 +41,8 @@ public class SceneManager : MonoBehaviour
     {
         Time.timeScale = 0.1f;
         loadingBar.gameObject.SetActive(true);
+        BaseScene prevScene = GetCurScene();
+        prevScene.SceneSave();
         // 암전(Fade Out)
         float time = 0f;
         while (time < 0.5f)
@@ -62,11 +64,10 @@ public class SceneManager : MonoBehaviour
 
         // space 누르기 전에는 로딩이 안됨
         //yield return new WaitUntil(() => { return Input.GetKeyDown(KeyCode.Space); });
-        //oper.allowSceneActivation = true;
-
-        yield return new WaitForSeconds(0.1f);
+        //oper.allowSceneActivation = true;        
 
         BaseScene curScene = GetCurScene();
+        curScene.SceneLoad();
         yield return curScene.LoadingRoutine();
         Time.timeScale = 1f;
         Manager.SceneManager.SetLoadingBarValue(1f);
@@ -88,5 +89,10 @@ public class SceneManager : MonoBehaviour
     public void SetLoadingBarValue(float value)
     {
         loadingBar.value = value;
+    }
+
+    public int GetCurSceneIndex()
+    {
+        return UnitySceneManager.GetActiveScene().buildIndex;
     }
 }
